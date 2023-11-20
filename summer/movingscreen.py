@@ -10,7 +10,7 @@ while True:
     i = i % 1011
     im = Image(Point(300, 300), 'Summer_{}.gif'.format(i))
     im.draw(win)
-    update(20)
+    update(10)
     i += 1
     key = win.checkKey()
     if key:
