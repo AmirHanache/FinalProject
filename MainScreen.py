@@ -3,15 +3,15 @@
 ## top right corner will be "Train"
 ## bottom left corner will be "Sleep"
 ## bottom right corner will be "Feed"
-from graphics import **
+from graphics import *
 from button import Button
 from PIL import Image as pilImage
-from time import **
+from time import *
 
 
 class PetMain:
     def __init__(self):
-        win = self.win = GraphWIn("Let's Play!", 600, 600)
+        win = self.win = GraphWin("Let's Play!", 600, 600)
         win.setCoords(0,0,2,3)
 
         ## adding buttons
