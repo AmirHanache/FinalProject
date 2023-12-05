@@ -38,6 +38,10 @@ class PetMain:
                 if b.clicked(p):
                     return b.getLabel()
 
+    def OpenNewWindow(self):
+        click = self.win.getMouse()
+        if click == 
+
     def close(self):
         self.win.close()
 
