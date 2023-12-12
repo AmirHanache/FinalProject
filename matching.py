@@ -93,7 +93,7 @@ class MemoryGame:
                 self.flipCard(card1)
                 self.flipCard(card2)
 
-def main():
+def train_game():
     win = GraphWin("Training Game", 430, 430)
     win.setBackground("lightblue")
 

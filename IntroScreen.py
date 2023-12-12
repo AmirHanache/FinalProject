@@ -53,21 +53,25 @@ class MainScreen:
 
     def create_pet(self):
         pet_name = simpledialog.askstring("Pet Name", "What do you want to name your pet?")
+        initial_level = 1  # Starting level for a new pet
         if pet_name:
             with open('pet_names.txt', 'a') as file:
-                file.write(pet_name + '\n')
+                file.write(pet_name + ',' + str(initial_level) + '\n')
             self.pet_name = pet_name  # Update the pet's name attribute
 
     def load_pet(self):
         pet_name = simpledialog.askstring("Load Pet", "Enter your pet's name:")
         if pet_name:
-            with open('pet_names.txt', 'r') as file:
-                if pet_name in file.read().splitlines():
-                    # Code to handle the loading of the pet
-                    self.pet_name = pet_name  # Update the pet's name attribute
-                else:
-                    messagebox.showinfo("No Pet Found", "No such pet found")
-
+            try:
+                with open('pet_names.txt', 'r') as file:
+                    for line in file:
+                        name, level = line.strip().split(',')
+                        if name == pet_name:
+                            return name, int(level)  # Return both name and level
+                messagebox.showinfo("No Pet Found", "No such pet found")
+            except FileNotFoundError:
+                messagebox.showinfo("No Data", "No saved data found")
+        return None, None  # Return None if no pet is found
 
     def close(self):
         self.win.close()
