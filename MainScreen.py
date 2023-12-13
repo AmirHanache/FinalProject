@@ -104,7 +104,7 @@ class PetMain:
                 self.move_doggy_based_on_key(key)  # Correct indentation
 
             current_time = time.time()
-            if current_time - self.last_update_time >= 5:  # 20 seconds interval
+            if current_time - self.last_update_time >= 20:  # 20 seconds interval
                 self.update_bars()
                 self.last_update_time = current_time  # Reset the last update time
 
@@ -125,7 +125,13 @@ class PetMain:
                 self.mini_games_completed += 1  # Increment the mini-game completion counter
                 self.reinitialize_window()
             elif self.is_near_button(self.doggy, self.sleep):
-                sheepgame.sheep_game()
+                guessed_count, actual_count = sheepgame.sheep_game()
+                # Map the score from 20-40 to 0-5
+                difference = abs(guessed_count - actual_count)
+                mapped_sleep_score = max(0, 5 - difference)
+
+                self.sleep_score = mapped_sleep_score
+                self.update_sleep(self.sleep_score)
                 self.mini_games_completed += 1  # Increment the mini-game completion counter
                 self.reinitialize_window()
             elif self.is_near_button(self.doggy, self.play):
@@ -179,7 +185,7 @@ class PetMain:
             self.sleep_boxes[i].draw(self.win)
 
     def level_up(self):
-        if self.mini_games_completed >= 1:
+        if self.mini_games_completed >= 2:
             self.dog_level += 1
             self.dog_level_text.setText(f"Level: {self.dog_level}")  # Update the level display
             self.mini_games_completed = 0  # Reset the counter

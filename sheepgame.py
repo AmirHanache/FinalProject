@@ -94,8 +94,11 @@ def sheep_game():
 
     entry_box.setText("")  # Clear the text entry box
     user_count = wait_for_input(win, entry_box)
+    actual_count = len(sheep_list)
 
     display_results(win, user_count, sheep_list)
+
+    return user_count, actual_count
 
 if __name__ == "__main__":
     sheep_game()
