@@ -98,5 +98,7 @@ def sheep_game():
 
     display_results(win, user_count, sheep_list)
 
+    return user_count
+
 if __name__ == "__main__":
     sheep_game()

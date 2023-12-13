@@ -86,3 +86,5 @@ def start_food_game():
     # Wait for the user to click before closing the window
     win.getMouse()
     win.close()
+
+    return score 

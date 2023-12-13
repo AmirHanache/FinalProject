@@ -5,6 +5,7 @@ import time
 import foodgame
 import sheepgame
 import matching
+import pettinggame
 
 
 class PetMain:
@@ -45,7 +46,7 @@ class PetMain:
         self.dog_level_text.draw(self.win)
 
         ## adding buttons
-        self.play = Button(win, Point(500, 475), 85, 30, "Play Fetch!")
+        self.play = Button(win, Point(500, 475), 85, 30, "Play!")
         self.train = Button(win, Point(150, 50), 75, 30, "Training")
         self.sleep = Button(win, Point(525, 50), 85, 30, "Nap Time")
         self.feed = Button(win, Point(150, 475), 85, 30, "Feed Me!")
@@ -114,8 +115,10 @@ class PetMain:
             self.level_up()
             # Only trigger the mini-game if the cooldown has elapsed
             if self.is_near_button(self.doggy, self.feed):
-                foodgame.start_food_game()  # Pass the main game window to the mini-game
+                food_game_score = foodgame.start_food_game()  # Pass the main game window to the mini-game
                 self.mini_games_completed += 1  # Increment the mini-game completion counter
+                self.health_score = food_game_score
+                self.update_health(self.health_score)
                 self.reinitialize_window()
             elif self.is_near_button(self.doggy, self.train):
                 matching.train_game()
@@ -125,9 +128,10 @@ class PetMain:
                 sheepgame.sheep_game()
                 self.mini_games_completed += 1  # Increment the mini-game completion counter
                 self.reinitialize_window()
-            elif self.is_near_button(self.doggy, self.feed):
-                print("Starting Feed Mini-Game")
-
+            elif self.is_near_button(self.doggy, self.play):
+                pettinggame.petting()
+                self.mini_games_completed += 1  # Increment the mini-game completion counter
+                self.reinitialize_window()
         self.close()
 
     def move_doggy_based_on_key(self, key):
